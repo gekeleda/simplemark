@@ -66,6 +66,9 @@ def watermark(input_directory, output_directory):
     for f in output_directory.iterdir():
         print(f" - {f.name}")
 
+    input_directory = Path(input_directory) / "train.jsonl"
+    print(f"Changed input directory to {input_directory}")
+
     data = load_data(input_directory)
 
     # we just add "_xy123_" as watermark
