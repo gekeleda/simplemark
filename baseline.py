@@ -55,6 +55,11 @@ def watermark(input_directory, output_directory):
         f"Input directory: {input_directory}, exists: {Path(input_directory).exists()}, type: {'file' if Path(input_directory).is_file() else 'directory'}"
     )
 
+    if Path(input_directory).is_dir():
+        print("Files in input directory:")
+        for f in input_directory.iterdir():
+            print(f" - {f.name}")
+
     print(f"Output directory: {output_directory}")
 
     print("Files in output directory:")
@@ -75,6 +80,25 @@ def watermark(input_directory, output_directory):
 @click.argument("input_directory", type=Path)
 @click.argument("output_directory", type=Path)
 def detect(input_directory, output_directory):
+
+    print(
+        f"Input directory: {input_directory}, exists: {Path(input_directory).exists()}, type: {'file' if Path(input_directory).is_file() else 'directory'}"
+    )
+
+    if Path(input_directory).is_dir():
+        print("Files in input directory:")
+        for f in input_directory.iterdir():
+            print(f" - {f.name}")
+
+    print(f"Output directory: {output_directory}")
+
+    print("Files in output directory:")
+    for f in output_directory.iterdir():
+        print(f" - {f.name}")
+
+    input_directory = Path(input_directory) / "texts.jsonl"
+    print(f"Changed input directory to {input_directory}")
+
     data = load_data(input_directory)
 
     # label should be 1.0 if our watermark "_xy123_" is in the text

@@ -5,4 +5,3 @@ RUN apt-get update \
 	&& pip3 install --break-system-packages tira click pandas
 
 ADD baseline.py /
-
