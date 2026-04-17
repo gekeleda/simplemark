@@ -66,10 +66,12 @@ def watermark(input_directory, output_directory):
     for f in output_directory.iterdir():
         print(f" - {f.name}")
 
-    input_directory = Path(input_directory) / "train.jsonl"
-    print(f"Changed input directory to {input_directory}")
+    input_file = Path(input_directory) / "train.jsonl"
+    if not input_file.exists():
+        input_file = Path(input_directory) / "dataset.jsonl"
+    print(f"Changed input file path to {input_file}")
 
-    data = load_data(input_directory)
+    data = load_data(input_file)
 
     # we just add "_xy123_" as watermark
     data["text"] = data["text"].apply(lambda i: i + " _xy123_")
